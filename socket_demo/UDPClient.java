@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.Random;
 
 class UDPClient {
     public static void main(String args[]) throws Exception
