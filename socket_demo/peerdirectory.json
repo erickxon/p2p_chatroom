@@ -1,0 +1,23 @@
+{"Users": [{
+  "username": "ChatAdmin",
+  "hostname": "Ecorp01",
+  "hostIP": "1.1.1.1",
+  "port": "0",
+  "rating": "5"
+},
+{
+  "username": "Mr.Robot",
+  "hostname": "Kali0",
+  "hostIP": "192.168.0.1",
+  "port": "6789",
+  "rating": "4"
+},
+{
+  "username": "Elliot",
+  "hostname": "Kali1",
+  "hostIP": "10.0.0.1",
+  "port": "7789",
+    "rating": "5"
+  }
+]
+}

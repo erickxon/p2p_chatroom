@@ -2,57 +2,82 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-class WebServer{
+import java.io.FileReader; 
+import java.util.Iterator; 
+import java.util.Map; 
+  
 
-    public static void main(String argv[]) throws Exception  {
+import org.json.simple.JSONArray; 
+import org.json.simple.JSONObject; 
+import org.json.simple.parser.*;
 
-          String requestMessageLine;
-          String fileName;
 
-          ServerSocket listenSocket = new ServerSocket(6789);
-          Socket connectionSocket = listenSocket.accept();
+class Online{
 
-          BufferedReader inFromClient =
-            new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-          DataOutputStream outToClient =
-            new DataOutputStream(connectionSocket.getOutputStream());
+  public static void main(String argv[]) throws Exception  {
 
-          requestMessageLine = inFromClient.readLine();
+    String requestMessageLine;
+    String fileName;
 
-          StringTokenizer tokenizedLine =
-            new StringTokenizer(requestMessageLine);
+    ServerSocket listenSocket = new ServerSocket(6789);
+    Socket connectionSocket = listenSocket.accept();
 
-                      if (tokenizedLine.nextToken().equals("GET")){
+    BufferedReader inFromClient =
+    new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
+    DataOutputStream outToClient =
+    new DataOutputStream(connectionSocket.getOutputStream());
 
-          fileName = tokenizedLine.nextToken();
+    requestMessageLine = inFromClient.readLine();
 
-          if (fileName.startsWith("/") == true )
-                         fileName  = fileName.substring(1);
+    StringTokenizer tokenizedLine =
+    new StringTokenizer(requestMessageLine);
 
-                      File file = new File(fileName);
-          int numOfBytes = (int) file.length();
+  if (tokenizedLine.nextToken().equals("Online")){
 
-          FileInputStream inFile  = new FileInputStream (fileName);
+    
+  FileWriter myWriter = new FileWriter("/tmp/p2pDirectory/chatserver/peerdirectory.json",true);
+  myWriter.write("Files in Java might be tricky, but it is fun enough!");
+  myWriter.close();
+  System.out.println("Successfully wrote to the file.");
+  myWriter.close();
 
-                      byte[] fileInBytes = new byte[numOfBytes];
-          inFile.read(fileInBytes);
 
-          outToClient.writeBytes("HTTP/1.0 200 Document Follows\r\n");
+  connectionSocket.close();
+}
 
-          if (fileName.endsWith(".jpg"))
-                  outToClient.writeBytes("Content-Type: image/jpeg\r\n");
-          if (fileName.endsWith(".gif"))
-                  outToClient.writeBytes("Content-Type: image/gif\r\n");
 
-          outToClient.writeBytes("Content-Length: " + numOfBytes + "\r\n");
-          outToClient.writeBytes("\r\n");
 
-          outToClient.write(fileInBytes, 0, numOfBytes);
+  else if (tokenizedLine.nextToken().equals("GET")){
+      fileName = tokenizedLine.nextToken();
 
-          connectionSocket.close();
-                     }
+      if (fileName.startsWith("/") == true )
+       fileName  = fileName.substring(1);
 
-     else System.out.println("Bad Request Message");
+     File file = new File(fileName);
+     int numOfBytes = (int) file.length();
 
-     }
+     FileInputStream inFile  = new FileInputStream (fileName);
+
+     byte[] fileInBytes = new byte[numOfBytes];
+     inFile.read(fileInBytes);
+
+     outToClient.writeBytes("HTTP/1.0 200 Document Follows\r\n");
+
+     if (fileName.endsWith(".jpg"))
+      outToClient.writeBytes("Content-Type: image/jpeg\r\n");
+    if (fileName.endsWith(".gif"))
+      outToClient.writeBytes("Content-Type: image/gif\r\n");
+    if (fileName.endsWith(".txt"))
+      outToClient.writeBytes("Content-Type: text/plain\r\n");
+
+    outToClient.writeBytes("Content-Length: " + numOfBytes + "\r\n");
+    outToClient.writeBytes("\r\n");
+
+    outToClient.write(fileInBytes, 0, numOfBytes);
+
+    connectionSocket.close();
+  }
+  else System.out.println("Bad Request Message");
+
+}
 }
