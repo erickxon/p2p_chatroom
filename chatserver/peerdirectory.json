@@ -1,5 +1,4 @@
-[
- {
+{"Users":[{
     "username": "ChatAdmin",
     "hostname": "Ecorp01", 
     "hostIP": "1.1.1.1",
@@ -19,5 +18,5 @@
     "hostIP": "10.0.0.1",
     "port": "7789",
     "rating": "5"
-  }
-]
+  }]
+}
