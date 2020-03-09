@@ -34,12 +34,36 @@ class Online{
 
   if (tokenizedLine.nextToken().equals("Online")){
 
+//GET EXISTING USER FILE
+//TURN USERFILE INTO JAVA USER ARRAY
+//ADD NEW USER TO ARRAY
+//TURN IT INTO JSON AND REWRITE FILE
+//JSON TO HASH --> DOES IT NEED TO BE A JSON FILE AT ALL? --> SERVER ALWAYS ON
+
+  JSONArray array = (JSONArray) jsonObject.get("Users");
+  Iterator iter = array.iterator();
+
+  while (iter.hasNext()) {
+          System.out.println( ( iter.next() ).get("title") );
+      }
+//
+
+    String username = tokenizedLine.nextToken();
+    String hostname = tokenizedLine.nextToken();
+    String hostIP = tokenizedLine.nextToken();
+    String port = tokenizedLine.nextToken();
+    String rating = tokenizedLine.nextToken();
     
-  FileWriter myWriter = new FileWriter("/tmp/p2pDirectory/chatserver/peerdirectory.json",true);
-  myWriter.write("Files in Java might be tricky, but it is fun enough!");
-  myWriter.close();
-  System.out.println("Successfully wrote to the file.");
-  myWriter.close();
+    FileWriter myWriter = new FileWriter("/tmp/p2pDirectory/chatserver/peerdirectory.json",true);
+    myWriter.write("{");
+    myWriter.write("\"username\": "+"\""+username+"\""+"\n",);
+    myWriter.write("\"hostname\": "+"\""+hostname+"\""+"\n",);
+    myWriter.write("\"hostIP\": "+"\""+hostIP+"\""+"\n",);
+    myWriter.write("\"port\": "+"\""+port+"\""+"\n",);
+    myWriter.write("\"rating\": "+"\""+rating+"\""+"\n",);
+    myWriter.write("}");
+    System.out.println("Successfully wrote to the file.");
+    myWriter.close();
 
 
   connectionSocket.close();
