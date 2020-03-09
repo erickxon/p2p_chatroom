@@ -39,6 +39,7 @@ class Online{
 //ADD NEW USER TO ARRAY
 //TURN IT INTO JSON AND REWRITE FILE
 //JSON TO HASH --> DOES IT NEED TO BE A JSON FILE AT ALL? --> SERVER ALWAYS ON
+//MESSAGE IS JUST COMPOSED OF NEW LINES (NO OBJECT STRUCTURE)
 
   JSONArray array = (JSONArray) jsonObject.get("Users");
   Iterator iter = array.iterator();
