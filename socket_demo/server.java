@@ -25,33 +25,39 @@ class User{
     this.rating = rating;
   }
 
-  public String getString(){
+  public String toString(){
       return "username: "+username+"\nhostname"+hostname+"\nhostIP"+hostIP+"\nport"+"\nrating";
   }
 
 }
 
-public static void addToDirectory(Hashtable directory<String, User>, User user){
-    directory.put(user.username, user);
-}
-
-public static void removeFromDirectory(Hashtable directory<String, User>, String username){
-    directory.remove(username);
-}
-
-public static void queryForPeers(Hashtable directory<String, User>, DataOutputStream outStream){
-    String[] keySet = directory.keySet();
-    String stringbuilder = "";
-    for(int i = 0;i<keySet.length();i++){
-        stringbuilder += directory.get(keySet[i]).getString();
-    }
-
-    outStream.writeBytes(stringbuilder);
-
-}
 
 
 class Server{
+
+
+public static void addToDirectory(Hashtable directory, User user){
+    directory.put(user.username, user);
+}
+
+public static void removeFromDirectory(Hashtable directory, String username){
+    directory.remove(username);
+}
+
+public static void queryForPeers(Hashtable directory, DataOutputStream outStream){
+    Set<String> keySet = directory.keySet();
+    String stringbuilder = "";
+    for(String s: keySet){
+        stringbuilder += ((User)(directory.get(s))).toString();
+    }
+
+    try{
+    outStream.writeBytes(stringbuilder);
+    }
+    catch(Exception e){
+        //do exception;
+    }
+}
 
   public static void main(String argv[]) throws Exception  {
 

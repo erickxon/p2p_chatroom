@@ -29,10 +29,10 @@ class client {
         outToServer.writeBytes(inFromUser.readLine() + '\n');
         outToServer.writeBytes(inFromUser.readLine()+ '\n');*/
         outToServer.writeBytes(method+ '\n');
-
-        for (int i = 0; i < in.available(); i++) {
-            System.out.println("" + in.read());
-         }
+        String line;
+        while ((line = inFromServer.readLine()) != null)
+            System.out.println("" + inFromServer.read());
+         
         
      
         
