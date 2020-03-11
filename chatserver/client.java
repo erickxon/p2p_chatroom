@@ -49,12 +49,20 @@ public class threadclient
                     dos.writeUTF(scn.nextLine()); 
                     dos.writeUTF(scn.nextLine()); 
                     System.out.println(dis.readUTF()); 
-
+                    //s.close(); 
+                    //break;
                 }
+
+                if(tosend.equals("query for peers")){
+                    String line ;
+                    System.out.println(dis.readUTF()); 
+                }
+
+                
                   
                 // printing date or time as requested by client 
-                String received = dis.readUTF(); 
-                System.out.println(received); 
+                //String received = dis.readUTF(); 
+                //System.out.println(received); 
             } 
               
             // closing resources 

@@ -88,14 +88,18 @@
                         String rating = dis.readUTF(); 
                         directory.put(username, new User(username, hostname, hostIP, Integer.parseInt(port),Integer.parseInt(rating)));
                         dos.writeUTF(username + " is now ONLINE."); 
+                        //this.s.close(); 
+                        break;
                         //queryForPeers(users,outToClient);
                     case "query for peers":
                            Set<String> keySet = directory.keySet();
                             String stringbuilder = "";
                             for(String s: keySet){
-                                stringbuilder += ((User)(directory.get(s))).toString();
+                                stringbuilder += "\n----------\n";
+                                stringbuilder += ((User)(directory.get(s))).toString(); 
                             }
                             dos.writeUTF(stringbuilder);
+                            break;
                     default: 
                         dos.writeUTF("Invalid input"); 
                         break; 
