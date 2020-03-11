@@ -21,7 +21,7 @@ class UDPClient {
       sendData = sentence.getBytes();
 
       DatagramPacket sendPacket =
-         new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
+         new DatagramPacket(sendData, sendData.length, IPAddress, 6789);
 
       clientSocket.send(sendPacket);
 

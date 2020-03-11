@@ -26,14 +26,14 @@ class User{
   }
 
   public String toString(){
-      return "username: "+username+"\nhostname"+hostname+"\nhostIP"+hostIP+"\nport"+"\nrating";
+      return "username: "+username+"\nhostname: "+hostname+"\nhostIP: "+hostIP+"\nport: "+port+"\nrating: "+rating;
   }
 
 }
 
 
 
-class Server{
+class server{
 
 
 public static void addToDirectory(Hashtable directory, User user){
@@ -52,7 +52,8 @@ public static void queryForPeers(Hashtable directory, DataOutputStream outStream
     }
 
     try{
-    outStream.writeBytes(stringbuilder);
+      System.out.println(stringbuilder);
+      outStream.writeBytes(stringbuilder);
     }
     catch(Exception e){
         //do exception;
@@ -104,14 +105,16 @@ public static void queryForPeers(Hashtable directory, DataOutputStream outStream
     String hostIP = inFromClient.readLine();
     String port = inFromClient.readLine();
     String rating = inFromClient.readLine();
-    users.put(username, new User(username, hostname, hostIP, Integer.parseInt(port),Integer.parseInt(rating)));
+    addToDirectory(users, new User(username, hostname, hostIP, Integer.parseInt(port),Integer.parseInt(rating)));
+    queryForPeers(users,outToClient);
 
+    /*
     outToClient.writeBytes("username: " + users.get(username).username + "\r\n");
     outToClient.writeBytes("hostname" + users.get(username).hostname + "\r\n");
     outToClient.writeBytes("hostIP" + users.get(username).hostIP + "\r\n");
     outToClient.writeBytes("port" + users.get(username).port + "\r\n");
     outToClient.writeBytes("rating" + users.get(username).rating + "\r\n");
-
+*/
     /*
     outToClient.writeBytes(username+"\n");
     outToClient.writeBytes(hostname+"\n");
@@ -148,7 +151,7 @@ public static void queryForPeers(Hashtable directory, DataOutputStream outStream
 
     outToClient.write(fileInBytes, 0, numOfBytes);
 */
-    connectionSocket.close();
+    //connectionSocket.close();
   }
 
   else System.out.println("Bad Request Message");

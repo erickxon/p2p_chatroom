@@ -38,9 +38,9 @@ class client {
         
 //		System.out.println("Hello "+ inFromServer.readLine());
 	//}
-	System.out.println("FROM SERVER: " + modifiedSentence);
-		if(clientSocket!=null)
-			clientSocket.close();
+	//System.out.println("FROM SERVER: " + modifiedSentence);
+		//if(clientSocket!=null)
+		//	clientSocket.close();
 
 	}
 }
